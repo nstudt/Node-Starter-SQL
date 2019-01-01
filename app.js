@@ -1,7 +1,10 @@
 const express = require("express");
 const app = express();
+const error_controller =  require('./controllers/error');
+
 const passport = require("passport");
 const bodyParser = require("body-parser");
+const path = require("path");
 //using handlebars hbs with partials. Not npps express-handlebars
 const hbs = require("hbs");
 //declare your routes here
@@ -23,5 +26,7 @@ hbs.registerHelper("json", function (obj) {
 });
 
 app.use("/", index_routes);
+app.use(error_controller.get404);
+
 
 module.exports = app;
