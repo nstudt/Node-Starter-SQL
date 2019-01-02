@@ -6,21 +6,21 @@
     {{> header}}
 
     <main>
-        {{# if (users.length > 0) }}
+       
         <div class="grid">
             {{#each users}}
             <article>
                 <header>
                     <h1>
-                        {{user.id}}
+                        {{id}}
                     </h1>
                 </header>
                 <div>
                     <h2>
-                        {{user.userName}}
+                        {{userName}}
                     </h2>
                     <p>
-                        {{user.email}}
+                        {{email}}
                     </p>
                 </div>
                 <div>
@@ -36,7 +36,7 @@
         </div>
         {{else}}
         <h1>No Products Found!</h1>
-        {{/if}}
+        {{/each}}
         {{> footer}}
 </body>
 

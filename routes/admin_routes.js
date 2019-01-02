@@ -5,8 +5,7 @@ const admin_controller = require('../controllers/admin_controller')
 
 // router.get("/add-user", admin_controller.getAddUser);
 
-//read all users
-// router.get("/users", admin_controller.getUsers);
+router.get('/get-users', admin_controller.getUsers);
 
 // router.post('/add-user', admin_controller.postUser);
 

@@ -1,6 +1,6 @@
 const http = require("http");
 const app = require("./app");
-const User = require("./models/user_model");
+// const User = require("./models/user_model");
 const sequelize = require("./util/database");
 
 const port = process.env.PORT || 3000;
@@ -8,7 +8,7 @@ const server = http.createServer(app);
 
 
 sequelize
-  .sync({ force: true })
+  .sync()
   .then(result => {
     console.log("success result of sequelize sync: ");
       server.listen(port, () => console.log(`Server listening on ${port}`));

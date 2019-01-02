@@ -1,21 +1,26 @@
 const User = require("../models/user_model");
 const faker = require('faker');
+const uuidv4 = require("uuidv4");
 
 
 module.exports.getUsers = (req, res, next) => {
-    User.fetchAll(users => {
-        res.render('admin/users', {
-            users: users,
-            pageTitle: 'Admin Users',
-            path: '/admin/users'
+    User.findAll()
+        .then(users => {
+            res.render('users', {
+                users: users,
+                pageTitle: 'All Products',
+               
+            });
+        })
+        .catch(err => {
+            console.log(err);
         });
-    });
 };
 
 module.exports.getAddUser = (req, res, next) => {
-    res.render('admin/add-user', {
+    res.render('add-user', {
         pageTitle: 'Add User',
-        path: '/admin/add-user'
+        
     });
 }
 
@@ -32,9 +37,10 @@ module.exports.postAddUser = (req, res, next) => {
 
 //make sample Users
 //TODO: implement Faker with records in params
-module.exports.makeUsers = (req, res, next) => {
+module.exports.makeUsers = (req, res) => {
+    let q = req.query.records || 5;
     let i;
-    for (i = 0; i < 10; i++) {
+    for (i = 0; i < q; i++) {
         obj = new User();
         const user = makeFakeUser(obj);
         user.save()
@@ -50,11 +56,13 @@ module.exports.makeUsers = (req, res, next) => {
 }
 
 function makeFakeUser(obj) {
-    obj.id = faker.random.uuid();
-    obj.username = faker.internet.userName();
+    // obj.id = faker.random.uuid();
+    obj.id = uuidv4();
+    obj.lastName = faker.name.lastName();
+    obj.firstName = faker.name.firstName();
     obj.email = faker.internet.email();
     obj.password = faker.internet.password();
     obj.profilePic = faker.image.imageUrl();
 
-    return obj
-}
+    return obj;
+};
