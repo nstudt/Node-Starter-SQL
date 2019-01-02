@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="/../assets/css/style.css">
+{{> head}}
+
+<body>
+    {{> header}}
+<main>
+    {{# if (users.length > 0) }}
+    <div class="grid">
+        {{#each users}}
+        <article >
+            <header >
+                <h1 >
+                    {{user.id}}
+                </h1>
+            </header>
+            <div >
+                <h2>
+                    {{user.userName}}
+                </h2>
+                <p>
+                    {{user.email}}
+                </p>
+            </div>
+            <div>
+                <a href="/admin/edit-user/{{user.id}}?edit=true" class="btn">Edit</a>
+                <form action="/admin/delete-user" method="POST">
+                    <input type="hidden" value="{{user.id}}" name="userID">
+                    <button class="btn" type="submit">Delete</button>
+                </form>
+
+            </div>
+        </article>
+     
+    </div>
+    {{else}}
+    <h1>No Products Found!</h1>
+    {{/if}}
+</main>
+    
+</body>
+</html>
+
+
+
+
+
+

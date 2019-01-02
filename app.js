@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
-const error_controller =  require('./controllers/error');
+const error_controller =  require('./controllers/error_controller');
+
 
 const passport = require("passport");
 const bodyParser = require("body-parser");
@@ -9,6 +10,7 @@ const path = require("path");
 const hbs = require("hbs");
 //declare your routes here
 const index_routes = require("./routes/index_routes");
+const admin_routes = require("./routes/admin_routes");
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -25,8 +27,9 @@ hbs.registerHelper("json", function (obj) {
     return new hbs.SafeString(JSON.stringify(obj));
 });
 
-app.use("/", index_routes);
-app.use(error_controller.get404);
 
+app.use('/admin', admin_routes);
+app.use("/", index_routes);
+// app.use(error_controller.get404);
 
 module.exports = app;

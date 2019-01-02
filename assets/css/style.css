@@ -1,0 +1,27 @@
+.user-form {
+    width: 20rem;
+    max-width: 90%;
+    margin: auto;
+    display: block;
+}
+
+.id {
+    width: 20rem;
+    max-width: 95%;
+    margin: 1rem;
+}
+
+.userName {
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.email {
+    text-align: center;
+    color: #4d4d4d;
+    margin-bottom: 0.5rem;
+}
+
+.password {
+    text-align: center;
+}
