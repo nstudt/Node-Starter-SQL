@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+{{> head}}
+
+<body>
+    {{> header}}
+    {{> navbar}}
+    <div class="card border-primary">
+        <h5 class="card-header text-center">Add User</h5>
+        <div class="card card-body w-90 border-primary">
+
+
+            <form action="/add-user" method="post" class="form-row">
+                <div class="form-row">
+                    <div class="form-group col-md-3 ">
+                        <label for="first_name">First Name</label>
+                        <input type="text" class="form-control" name="first_name" placeholder="first name" value=""
+                            autofocus required>
+
+                    </div>
+                    
+                    <div class="form-group col-md-3 ">
+                        <label for="last_name">Last Name</label>
+                        <input type="text" class="form-control" name="last_name" placeholder="last name" required value="">
+                    </div>
+                    {{!-- <div class="form-group col-md-2 ">
+                        <img src="" alt="200x200 Picture" class="img-thumbnail">
+                    </div> --}}
+
+                    
+                    <div class="form-group col-md-3 ">
+                        <label for="email">email</label>
+                        <input type="text" id="email" class="form-control" name="email" placeholder="email" value="">
+                    </div>
+                    <div class="form-group col-md-2 ">
+                        <label for="dob">password</label>
+                        <input id="email" type="text" class="form-control" name="email" placeholder="you@gmail.com">
+                    </div>
+                    <div class="form-group col-md-2 ">
+                        <label for="dob">Image</label>
+                        <input id="profilePic" type="text" class="form-control" name="profilePic" placeholder="URL">
+                    </div>
+                </div>
+        </div>
+       
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelector('#last_').onchange = changeEventHandler;
+        }, false);
+
+        function changeEventHandler(event) {
+            var d = new Date(event.target.value);
+            var age = document.getElementById('age').value;
+            d.setMonth(d.getMonth() - (age * 12));
+            d.setDate(1);
+            d.setMonth(1);
+            const x = document.getElementById('dob');
+            x.value = d.toDateString().split(' ').slice(1).join(' ');
+        }
+    </script>
+
+</body>
+
+</html>

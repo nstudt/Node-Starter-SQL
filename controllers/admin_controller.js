@@ -8,7 +8,7 @@ module.exports.getUsers = (req, res, next) => {
         .then(users => {
             res.render('users', {
                 users: users,
-                pageTitle: 'All Products',
+                pageTitle: 'All users',
                
             });
         })
@@ -17,6 +17,28 @@ module.exports.getUsers = (req, res, next) => {
         });
 };
 
+exports.getEditUser = (req, res, next) => {
+  const editMode = req.query.edit;
+  if (!editMode) {
+    return res.redirect("/");
+  }
+  const userId = req.params.userId;
+  req.user
+    .getUsers({ where: { id: userId } })
+    // User.findById(userId)
+    .then(users => {
+      const user = users[0];
+      if (!user) {
+        return res.redirect("/");
+      }
+      res.render("admin/edit-user", {
+        pageTitle: "Edit user",
+        editing: editMode,
+        user: user
+      });
+    })
+    .catch(err => console.log(err));
+};
 module.exports.getAddUser = (req, res, next) => {
     res.render('add-user', {
         pageTitle: 'Add User',
@@ -25,7 +47,7 @@ module.exports.getAddUser = (req, res, next) => {
 }
 
 module.exports.postAddUser = (req, res, next) => {
-    const user = new User(req.body);
+    const user = User.build(req.body);
     user.save()
     .then((result) => {
         console.log('result of postAddUser', result)
@@ -35,8 +57,10 @@ module.exports.postAddUser = (req, res, next) => {
     });
 }
 
+
+
+
 //make sample Users
-//TODO: implement Faker with records in params
 module.exports.makeUsers = (req, res) => {
     let q = req.query.records || 5;
     let i;
