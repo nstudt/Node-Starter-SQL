@@ -1,19 +1,22 @@
-const express = require("express");
+/* jslint node: true */
+'use strict';
 
-const auth_controller = require("../controllers/auth_controller");
-const isAuth = require("../middleware/is-auth");
+const express = require('express');
+
+const auth_controller = require('../controllers/auth_controller');
+const isAuth = require('../middleware/is-auth');
 
 const router = express.Router();
 
-router.get("/login", auth_controller.getLogin);
+router.get('/login', auth_controller.getLogin);
 
-router.get("/signup", auth_controller.getSignup);
+router.get('/signup', auth_controller.getSignup);
 
-router.post("/login", auth_controller.postLogin);
+router.post('/login', auth_controller.postLogin);
 
-router.post("/signup", auth_controller.postSignup);
+router.post('/signup', auth_controller.postSignup);
 
-router.post("/logout", auth_controller.postLogout);
+router.post('/logout', auth_controller.postLogout);
 
 module.exports = router;
 
